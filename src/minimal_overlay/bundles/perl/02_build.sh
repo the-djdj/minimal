@@ -18,10 +18,22 @@ fi
 
 rm -rf $DEST_DIR
 
+echo "Creating '/etc/hosts' file."
+echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+
+echo "Exporting environment variables"
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+
 echo "Configuring '$BUNDLE_NAME'."
-CFLAGS="$CFLAGS" ./Configure \
-  -des \
-  -Dprefix=/usr
+CFLAGS="$CFLAGS" ./Configure         \
+  -des -Dprefix=/usr                 \
+       -Dvendorprefix=/usr           \
+       -Dman1dir=/usr/share/man/man1 \
+       -Dman3dir=/usr/share/man/man3 \
+       -Dpager="/usr/bin/less -isR"  \
+       -Duseshrplib                  \
+       -Dusethreads
 
 echo "Building '$BUNDLE_NAME'."
 make -j $NUM_JOBS
@@ -38,6 +50,9 @@ set -e
 # '$OVERLAY_ROOTFS' will be overwritten correctly.
 cp -r --remove-destination $DEST_DIR/* \
   $OVERLAY_ROOTFS
+
+echo "Cleaning environment variables"
+unset BUILD_ZLIB BUILD_BZIP2
 
 echo "Bundle '$BUNDLE_NAME' has been installed."
 
