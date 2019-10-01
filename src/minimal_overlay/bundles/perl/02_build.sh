@@ -20,8 +20,8 @@ rm -rf $DEST_DIR
 
 echo "Configuring '$BUNDLE_NAME'."
 CFLAGS="$CFLAGS" ./Configure \
-  --des \
-  --Dprefix=/usr
+  -des \
+  -Dprefix=/usr
 
 echo "Building '$BUNDLE_NAME'."
 make -j $NUM_JOBS
