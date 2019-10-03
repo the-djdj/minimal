@@ -19,20 +19,21 @@ fi
 rm -rf $DEST_DIR
 
 echo "Creating '/etc/hosts' file."
-echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+mkdir -p $DEST_DIR/etc/
+echo "127.0.0.1 localhost $(hostname)" > $DEST_DIR/etc/hosts
 
 echo "Exporting environment variables"
 export BUILD_ZLIB=False
-export BUILD_BZIP2=0
+export BUILD_BZIP2=1
 
 echo "Configuring '$BUNDLE_NAME'."
-CFLAGS="$CFLAGS" ./Configure         \
-  -des -Dprefix=/usr                 \
-       -Dvendorprefix=/usr           \
-       -Dman1dir=/usr/share/man/man1 \
-       -Dman3dir=/usr/share/man/man3 \
-       -Dpager="/usr/bin/less -isR"  \
-       -Duseshrplib                  \
+CFLAGS="$CFLAGS" ./Configure                  \
+  -des -Dprefix=$DES_TDIR/usr                 \
+       -Dvendorprefix=$DEST_DIR/usr           \
+       -Dman1dir=$DEST_DIR/usr/share/man/man1 \
+       -Dman3dir=$DEST_DIR/usr/share/man/man3 \
+       -Dpager="$DEST_DIR/usr/bin/less -isR"  \
+       -Duseshrplib                           \
        -Dusethreads
 
 echo "Building '$BUNDLE_NAME'."
