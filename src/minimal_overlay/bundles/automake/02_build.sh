@@ -20,7 +20,7 @@ rm -rf $DEST_DIR
 
 echo "Configuring '$BUNDLE_NAME'."
 CFLAGS="$CFLAGS" ./configure \
-  --prefix=/usr              \
+  --prefix=$DEST_DIR/usr     \
   --enable-gui=no            \
   --without-x                \
   --with-tlib=ncurses        \
