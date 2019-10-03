@@ -24,7 +24,7 @@ echo "127.0.0.1 localhost $(hostname)" > $DEST_DIR/etc/hosts
 
 echo "Exporting environment variables"
 export BUILD_ZLIB=False
-export BUILD_BZIP2=1
+export BUILD_BZIP2=0
 
 echo "Configuring '$BUNDLE_NAME'."
 CFLAGS="$CFLAGS" ./Configure                  \
