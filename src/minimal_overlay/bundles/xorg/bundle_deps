@@ -10,7 +10,6 @@ lex
 gcc
 gettext
 gperf
-m4
 ncurses
 intltool
 libpng
