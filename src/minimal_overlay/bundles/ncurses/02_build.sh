@@ -30,8 +30,9 @@ CFLAGS="$CFLAGS" ./configure \
     --with-default-terminfo-dirs=/lib/terminfo \
     --without-normal \
     --without-debug \
+    --without-ada \
     --without-cxx-binding \
-    --with-abi-version=5 \
+    --with-abi-version=6 \
     --enable-widec \
     --enable-pc-files \
     --with-shared \
